@@ -7,20 +7,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- supporting css files -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css">
 
-
+    <!-- supporting js files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
 
-
+    <!-- defined css files -->
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="extra.css">
-    <link rel="stylesheet" href="rough.css">
 
 </head>
 
@@ -28,7 +27,11 @@
 
     <!-- Navbar header -->
     <div class="navbar">
-        <h1 style="margin-bottom: 10px;"><img src="images/greenhouse.png" style="height: 3rem; width: 3rem;"><p>   </p>Greenhouse Automation</h1>
+        <h1 style="margin-bottom: 10px;"><img src="images/greenhouse.png" style="height: 3rem; width: 3rem;">
+            <p> </p>Greenhouse Automation
+        </h1>
+
+        <!-- get your weather widget code here (link: https://weatherwidget.io/) -->
         <a class="weatherwidget-io" href="https://forecast7.com/en/19d0872d88/mumbai/" data-label_1="MUMBAI"
             data-label_2="weather" data-days="3" data-theme="dark">MUMBAI weather</a>
         <script>
@@ -36,13 +39,16 @@
         </script>
     </div>
 
+
+
     <!-- Container with 6 cards -->
     <div class="container">
+
 
         <!-- first row (2 elements) -->
         <div class="row">
 
-            <!-- Temperature container (1) -->
+            <!-- Temperature card (1) -->
             <div class="col-md-6">
                 <div class="temperature" id="temp">
                     <!-- <h3>Temperature</h3> -->
@@ -54,7 +60,7 @@
                 </div>
             </div>
 
-            <!-- Humidity container (2) -->
+            <!-- Humidity card (2) -->
             <div class="col-md-6">
                 <div class="humidity" id="humid">
                     <!-- <h3>Humidity</h3> -->
@@ -68,10 +74,11 @@
 
         </div>
 
+
         <!-- Second row (2 elements) -->
         <div class="row">
 
-            <!-- CO2 container (3) -->
+            <!-- CO2 card (3) -->
             <div class="col-md-6">
                 <div class="co2" id="co2">
                     <!-- <h3>CO<sub>2</sub></h3> -->
@@ -84,11 +91,11 @@
             </div>
 
 
-            <!-- Light container (4) -->
+            <!-- Light card (4) -->
             <div class="col-md-6">
                 <div class="light" id="light">
                     <!-- <h3>Light</h3> -->
-                    <h2 id="c_light">200</h2>
+                    <h2 id="c_light">240</h2>
                     <sup>lx</sup>
                     <h5>Auto</h5>
                     <h4 id="m_light">220 lx</h4>
@@ -99,10 +106,11 @@
 
         </div>
 
+
         <!-- Third row (2 elements) -->
         <div class="row">
 
-            <!-- Water container (5) -->
+            <!-- Water card (5) -->
             <div class="col-md-6">
                 <div class="water" id="water">
                     <!-- <h3>Water</h3> -->
@@ -114,7 +122,7 @@
                 </div>
             </div>
 
-            <!-- Fertilizer container (6) -->
+            <!-- Fertilizer card (6) -->
             <div class="col-md-6">
                 <div class="fertilizer" id="fert">
                     <!-- <h3>Fertilizers</h3> -->
@@ -147,6 +155,7 @@
 
     </div>
 
+
     <!-- modal 2 for humidity-->
     <div id="humid_modal" class="modal">
 
@@ -165,6 +174,7 @@
 
     </div>
 
+
     <!-- modal 3 for CO2-->
     <div id="co2_modal" class="modal">
 
@@ -177,6 +187,7 @@
         </div>
 
     </div>
+
 
     <!-- modal 4 for light-->
     <div id="light_modal" class="modal">
@@ -209,12 +220,10 @@
             <!-- time picker start and end -->
             <div>
                 <input type="time" id="start_time" value="13:30">
-                <!-- <input type="submit" value="start"> -->
                 <input type="time" id="end_time" name="appt" value="13:30">
-                <!-- <input type="submit" value="end"> -->
             </div>
 
-            <!-- manual turn on off light -->
+            <!-- manual turn on/off light -->
             <!-- <div class="toggle-btn">
                 <input type="checkbox" class="cb-value" />
                 <span class="round-btn"></span>
@@ -225,6 +234,7 @@
         </div>
 
     </div>
+
 
     <!-- modal 5 for water-->
     <div id="water_modal" class="modal">
@@ -242,6 +252,7 @@
         </div>
 
     </div>
+
 
     <!-- modal 6 for Fertilizer-->
     <div id="fert_modal" class="modal">
@@ -266,18 +277,12 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
 
 
-
-
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
 
-
-
-
-
     <script src="index.js"></script>
-    <!-- <script src="app.js"></script> -->
+
 
 
     <!-- Modal script-->
@@ -370,14 +375,14 @@
     </script>
 
 
-    <!-- submit button script -->
+    <!-- Modal SUBMIT button animation script -->
     <script>
         document.getElementById("submit_t").innerHTML = "Submit";
         document.getElementById("submit_h").innerHTML = "Submit";
-        document.getElementById("submit_c").innerHTML="Submit";
-        document.getElementById("submit_l").innerHTML="Submit";
+        document.getElementById("submit_c").innerHTML = "Submit";
+        document.getElementById("submit_l").innerHTML = "Submit";
         document.getElementById("submit_w").innerHTML = "Submit";
-        document.getElementById("submit_f").innerHTML="Submit";
+        document.getElementById("submit_f").innerHTML = "Submit";
         $("button").on("click", function () {
             $(this).html('✓');
             $(this).css('background-color', '#10d421'); //#4CD698
@@ -390,9 +395,9 @@
         });
     </script>
 
-    <!-- script for on off modal button -->
+
+    <!-- script for on/off button inside modal -->
     <script>
-        //$('input.cb-value').prop("checked", true);
         $('.cb-value').click(function () {
             var mainParent = $(this).parent('.toggle-btn');
             if ($(mainParent).find('input.cb-value').is(':checked')) {
@@ -403,7 +408,9 @@
         })
     </script>
 
-    <!-- script to toggle between red blue white -->
+
+
+    <!-- script to toggle between red blue white (3 way light input) -->
     <script>
         function filterme(value) {
             value = parseInt(value); // Convert to an integer
@@ -428,6 +435,7 @@
             }
         }
 
+        //additional script to move only 1 position left or right
         $('#custom-toggle').data({
             was: $('#custom-toggle').val()
         }).on('input', function () {
@@ -439,8 +447,11 @@
     </script>
 
 
-    <!-- modal radial slider script -->
+
+    <!-- Modal Radial slider script -->
     <script>
+        //For full documentation on round slider visit 
+        //https://roundsliderui.com/
 
         //card 1 round slider Temperature
         $("#slider_t").roundSlider({
@@ -536,7 +547,6 @@
             sliderType: "min-range",
             startAngle: 90,
             svgMode: true,
-            // max: 256,
 
             rangeColor: "#ff3333",
             handleShape: "dot",
@@ -552,7 +562,6 @@
             sliderType: "min-range",
             startAngle: 90,
             svgMode: true,
-            //max: 256,
 
             rangeColor: "#0066ff",
             handleShape: "dot",
@@ -568,7 +577,6 @@
             sliderType: "min-range",
             startAngle: 90,
             svgMode: true,
-            //max: 256,
 
             rangeColor: "#ffc14d",
             handleShape: "dot",
@@ -602,7 +610,7 @@
             width: 5,
             showTooltip: false,
             disabled: true,
-            rangeColor: "#148df0",
+            rangeColor: "#148df0"
         });
 
         //card 6 round slider Fertilizer
@@ -628,12 +636,11 @@
             width: 5,
             showTooltip: false,
             disabled: true,
-            rangeColor: "#659b28",
-
+            rangeColor: "#659b28"
         });
     </script>
 
-    <!-- testing  -->
+    <!-- testing script  -->
 
 
 </body>
