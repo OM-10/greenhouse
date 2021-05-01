@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Greenhouse</title>
+    <link rel="icon" href="images/greenhouse.png" type="image/x-icon"> <!-- Title icon -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/round-slider@1.6.1/dist/roundslider.min.js"></script>
+
+
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="extra.css">
+    <link rel="stylesheet" href="rough.css">
+
+</head>
+
+<body>
+
+    <!-- Navbar header -->
+    <div class="navbar">
+        <h1 style="margin-bottom: 10px;"><img src="images/greenhouse.png" style="height: 3rem; width: 3rem;"><p>   </p>Greenhouse Automation</h1>
+        <a class="weatherwidget-io" href="https://forecast7.com/en/19d0872d88/mumbai/" data-label_1="MUMBAI"
+            data-label_2="weather" data-days="3" data-theme="dark">MUMBAI weather</a>
+        <script>
+            !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+        </script>
+    </div>
+
+    <!-- Container with 6 cards -->
+    <div class="container">
+
+        <!-- first row (2 elements) -->
+        <div class="row">
+
+            <!-- Temperature container (1) -->
+            <div class="col-md-6">
+                <div class="temperature" id="temp">
+                    <!-- <h3>Temperature</h3> -->
+                    <h2 id="c_temp">24</h2>
+                    <sup>°C</sup>
+                    <h5>Auto</h5>
+                    <h4 id="m_temp">26°C</h4>
+                    <img class="entityicon" src="images/thermometer.png">
+                </div>
+            </div>
+
+            <!-- Humidity container (2) -->
+            <div class="col-md-6">
+                <div class="humidity" id="humid">
+                    <!-- <h3>Humidity</h3> -->
+                    <h2 id="c_humid">56</h2>
+                    <sup>%</sup>
+                    <h5>Auto</h5>
+                    <h4 id="m_humid">59%</h4>
+                    <img class="entityicon" src="images/humidity.png">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Second row (2 elements) -->
+        <div class="row">
+
+            <!-- CO2 container (3) -->
+            <div class="col-md-6">
+                <div class="co2" id="co2">
+                    <!-- <h3>CO<sub>2</sub></h3> -->
+                    <h2 id="c_co2">300</h2>
+                    <sup>ppm</sup>
+                    <h5>Auto</h5>
+                    <h4 id="m_co2">350 ppm</h4>
+                    <img class="entityicon" src="images/co2.png">
+                </div>
+            </div>
+
+
+            <!-- Light container (4) -->
+            <div class="col-md-6">
+                <div class="light" id="light">
+                    <!-- <h3>Light</h3> -->
+                    <h2 id="c_light">200</h2>
+                    <sup>lx</sup>
+                    <h5>Auto</h5>
+                    <h4 id="m_light">220 lx</h4>
+                    <img class="entityicon" src="images/light.png">
+                    <br>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Third row (2 elements) -->
+        <div class="row">
+
+            <!-- Water container (5) -->
+            <div class="col-md-6">
+                <div class="water" id="water">
+                    <!-- <h3>Water</h3> -->
+                    <h2 id="c_water">78</h2>
+                    <sup>%</sup>
+                    <h5>Auto</h5>
+                    <h4 id="m_water">88%</h4>
+                    <img class="entityicon" src="images/water.png">
+                </div>
+            </div>
+
+            <!-- Fertilizer container (6) -->
+            <div class="col-md-6">
+                <div class="fertilizer" id="fert">
+                    <!-- <h3>Fertilizers</h3> -->
+                    <h2 id="c_fert">75</h2>
+                    <sup>%</sup>
+                    <h5>Auto</h5>
+                    <h4 id="m_fert">98 %</h4>
+                    <img class="entityicon" src="images/fertilizer.png">
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- MODAL for all 6 cards -->
+
+    <!-- modal 1 for temperature-->
+    <div id="temp_modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="temp_mc">
+            <h1>Temperature<span class="close" id="span_t">&times;</span></h1>
+            <div class="range" id="slider_t"></div>
+            <div class="range_in" id="slider_tin"> </div>
+            <button id="submit_t">Submit</button>
+        </div>
+
+    </div>
+
+    <!-- modal 2 for humidity-->
+    <div id="humid_modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="humid_mc">
+            <h1>Humidity<span class="close" id="span_h">&times;</span></h1>
+            <div class="range" id="slider_h"></div>
+            <div class="range_in" id="slider_hin"></div>
+            <!-- <div class="toggle-btn">
+                <h1>vbncsi</h1>
+                <input type="checkbox" class="cb-value"/>
+                <span class="round-btn"></span>
+            </div> -->
+            <button id="submit_h">Submit</button>
+        </div>
+
+    </div>
+
+    <!-- modal 3 for CO2-->
+    <div id="co2_modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="co2_mc">
+            <h1>CO<sub>2</sub><span class="close" id="span_c">&times;</span></h1>
+            <div class="range" id="slider_c"></div>
+            <div class="range_in" id="slider_cin"> </div>
+            <button id="submit_c">Submit</button>
+        </div>
+
+    </div>
+
+    <!-- modal 4 for light-->
+    <div id="light_modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="light_mc">
+
+            <!-- title -->
+            <h1>Light<span class="close" id="span_l">&times;</span></h1>
+
+            <!-- slider for red light -->
+            <div id="red">
+                <div class="range" id="slider_r"></div>
+            </div>
+            <!-- slider for blue light -->
+            <div id="blue">
+                <div class="range" id="slider_b"></div>
+            </div>
+            <!-- slider for white light -->
+            <div id="white">
+                <div class="range" id="slider_wh"></div>
+            </div>
+
+            <!-- 3 way toggle for selection rbw -->
+            <div class="wrapper">
+                <input type="range" name="points" onchange="filterme(this.value);" min="1" step="1" id="custom-toggle"
+                    class="tgl-def" max="3" value="2">
+            </div>
+
+            <!-- time picker start and end -->
+            <div>
+                <input type="time" id="start_time" value="13:30">
+                <!-- <input type="submit" value="start"> -->
+                <input type="time" id="end_time" name="appt" value="13:30">
+                <!-- <input type="submit" value="end"> -->
+            </div>
+
+            <!-- manual turn on off light -->
+            <!-- <div class="toggle-btn">
+                <input type="checkbox" class="cb-value" />
+                <span class="round-btn"></span>
+            </div> -->
+
+            <!-- final submit button -->
+            <button id="submit_l">Submit</button>
+        </div>
+
+    </div>
+
+    <!-- modal 5 for water-->
+    <div id="water_modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="water_mc">
+            <h1>Water<span class="close" id="span_w">&times;</span></h1>
+            <div class="range" id="slider_w"></div>
+            <div class="range_in" id="slider_win"></div>
+            <!-- <div class="toggle-btn">
+                <input type="checkbox" class="cb-value" />
+                <span class="round-btn"></span>
+            </div> -->
+            <button id="submit_w">Submit</button>
+        </div>
+
+    </div>
+
+    <!-- modal 6 for Fertilizer-->
+    <div id="fert_modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="fert_mc">
+            <h1>Fertilizer<span class="close" id="span_f">&times;</span></h1>
+            <div class="range" id="slider_f"></div>
+            <div class="range_in" id="slider_fin"> </div>
+            <button id="submit_f">Submit</button>
+        </div>
+
+    </div>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <!--Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+
+
+
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+
+
+
+
+
+    <script src="index.js"></script>
+    <!-- <script src="app.js"></script> -->
+
+
+    <!-- Modal script-->
+    <script>
+        // Get the modal
+        var modal_t = document.getElementById("temp_modal");
+        var modal_h = document.getElementById("humid_modal");
+        var modal_c = document.getElementById("co2_modal");
+        var modal_l = document.getElementById("light_modal");
+        var modal_w = document.getElementById("water_modal");
+        var modal_f = document.getElementById("fert_modal");
+
+        // Get the button that opens the modal
+        var btn_t = document.getElementById("temp");
+        var btn_h = document.getElementById("humid");
+        var btn_c = document.getElementById("co2");
+        var btn_l = document.getElementById("light");
+        var btn_w = document.getElementById("water");
+        var btn_f = document.getElementById("fert");
+
+        // Get the <span> element that closes the modal
+        var span_t = document.getElementById("span_t");
+        var span_h = document.getElementById("span_h");
+        var span_c = document.getElementById("span_c");
+        var span_l = document.getElementById("span_l");
+        var span_w = document.getElementById("span_w");
+        var span_f = document.getElementById("span_f");
+
+        // When the user clicks the button, open the modal 
+        btn_t.onclick = function () {
+            modal_t.style.display = "block";
+        }
+        btn_h.onclick = function () {
+            modal_h.style.display = "block";
+        }
+        btn_c.onclick = function () {
+            modal_c.style.display = "block";
+        }
+        btn_l.onclick = function () {
+            modal_l.style.display = "block";
+        }
+        btn_w.onclick = function () {
+            modal_w.style.display = "block";
+        }
+        btn_f.onclick = function () {
+            modal_f.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span_t.onclick = function () {
+            modal_t.style.display = "none";
+        }
+        span_h.onclick = function () {
+            modal_h.style.display = "none";
+        }
+        span_c.onclick = function () {
+            modal_c.style.display = "none";
+        }
+        span_l.onclick = function () {
+            modal_l.style.display = "none";
+        }
+        span_w.onclick = function () {
+            modal_w.style.display = "none";
+        }
+        span_f.onclick = function () {
+            modal_f.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal_t) {
+                modal_t.style.display = "none";
+            }
+            if (event.target == modal_h) {
+                modal_h.style.display = "none";
+            }
+            if (event.target == modal_c) {
+                modal_c.style.display = "none";
+            }
+            if (event.target == modal_l) {
+                modal_l.style.display = "none";
+            }
+            if (event.target == modal_w) {
+                modal_w.style.display = "none";
+            }
+            if (event.target == modal_f) {
+                modal_f.style.display = "none";
+            }
+        }
+    </script>
+
+
+    <!-- submit button script -->
+    <script>
+        document.getElementById("submit_t").innerHTML = "Submit";
+        document.getElementById("submit_h").innerHTML = "Submit";
+        document.getElementById("submit_c").innerHTML="Submit";
+        document.getElementById("submit_l").innerHTML="Submit";
+        document.getElementById("submit_w").innerHTML = "Submit";
+        document.getElementById("submit_f").innerHTML="Submit";
+        $("button").on("click", function () {
+            $(this).html('✓');
+            $(this).css('background-color', '#10d421'); //#4CD698
+
+
+            setTimeout(function () {
+                $("button").html('Submit');
+                $("button").css('background-color', 'black'); //#40B4DE
+            }, 1500)
+        });
+    </script>
+
+    <!-- script for on off modal button -->
+    <script>
+        //$('input.cb-value').prop("checked", true);
+        $('.cb-value').click(function () {
+            var mainParent = $(this).parent('.toggle-btn');
+            if ($(mainParent).find('input.cb-value').is(':checked')) {
+                $(mainParent).addClass('active');
+            } else {
+                $(mainParent).removeClass('active');
+            }
+        })
+    </script>
+
+    <!-- script to toggle between red blue white -->
+    <script>
+        function filterme(value) {
+            value = parseInt(value); // Convert to an integer
+            var r = document.getElementById("red");
+            var b = document.getElementById("blue");
+            var w = document.getElementById("white");
+            if (value == 1) {
+                $('#custom-toggle').removeClass('tgl-def', 'tgl-off').addClass('tgl-on');
+                r.style.display = "none";
+                b.style.display = "block";
+                w.style.display = "none";
+            } if (value == 2) {
+                $('#custom-toggle').removeClass('tgl-off', 'tgl-on').addClass('tgl-def');
+                r.style.display = "none";
+                b.style.display = "none";
+                w.style.display = "block";
+            } if (value == 3) {
+                $('#custom-toggle').removeClass('tgl-def', 'tgl-on').addClass('tgl-off');
+                r.style.display = "block";
+                b.style.display = "none";
+                w.style.display = "none";
+            }
+        }
+
+        $('#custom-toggle').data({
+            was: $('#custom-toggle').val()
+        }).on('input', function () {
+            var data = $(this).data();
+            $(this).data({
+                was: this.value = +data.was + (this.value > data.was || -1)
+            });
+        });
+    </script>
+
+
+    <!-- modal radial slider script -->
+    <script>
+
+        //card 1 round slider Temperature
+        $("#slider_t").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+
+            min: 7,
+            max: 40,
+
+            rangeColor: "#f6685e",
+            handleShape: "dot",
+            mouseScrollAction: true,
+            tooltipFormat: "round_t"
+        });
+        function round_t(args) {
+            return args.value + "°C";
+        }
+
+        $("#slider_tin").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+            radius: 66,
+            width: 5,
+            showTooltip: false,
+
+            min: 7,
+            max: 40,
+            disabled: true,
+            rangeColor: "#f54236",
+
+        });
+
+        //card 2 round slider Humidity
+        $("#slider_h").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+
+            rangeColor: "#0e99da",
+            handleShape: "dot",
+            mouseScrollAction: true,
+            tooltipFormat: "round_h"
+        });
+        function round_h(args) {
+            return args.value + "%";
+        }
+
+        $("#slider_hin").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+            radius: 66,
+            width: 5,
+            showTooltip: false,
+            disabled: true,
+            rangeColor: "#0a5b80",
+
+        });
+
+        //card 3 round slider CO2
+        $("#slider_c").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+            max: 1000,
+
+            rangeColor: "#73888c",
+            handleShape: "dot",
+            mouseScrollAction: true,
+            tooltipFormat: "round_c"
+        });
+        function round_c(args) {
+            return args.value + "ppm";
+        }
+
+        $("#slider_cin").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+            radius: 66,
+            width: 5,
+            showTooltip: false,
+            disabled: true,
+            rangeColor: "#4c595c",
+            max: 1000,
+
+        });
+
+        //card 4 round slider Light (red)
+        $("#slider_r").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+            // max: 256,
+
+            rangeColor: "#ff3333",
+            handleShape: "dot",
+            mouseScrollAction: true,
+            tooltipFormat: "round_r"
+        });
+        function round_r(args) {
+            return args.value + "%";
+        }
+
+        //card 4 round slider Light (blue)
+        $("#slider_b").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+            //max: 256,
+
+            rangeColor: "#0066ff",
+            handleShape: "dot",
+            mouseScrollAction: true,
+            tooltipFormat: "round_b"
+        });
+        function round_b(args) {
+            return args.value + "%";
+        }
+
+        //card 4 round slider Light (white)
+        $("#slider_wh").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+            //max: 256,
+
+            rangeColor: "#ffc14d",
+            handleShape: "dot",
+            mouseScrollAction: true,
+            tooltipFormat: "round_wh"
+        });
+        function round_wh(args) {
+            return args.value + "%";
+        }
+
+        //card 5 round slider Water
+        $("#slider_w").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+
+            rangeColor: "#64b5f6",
+            handleShape: "dot",
+            mouseScrollAction: true,
+            tooltipFormat: "round_w"
+        });
+        function round_w(args) {
+            return args.value + "%";
+        }
+
+        $("#slider_win").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+            radius: 66,
+            width: 5,
+            showTooltip: false,
+            disabled: true,
+            rangeColor: "#148df0",
+        });
+
+        //card 6 round slider Fertilizer
+        $("#slider_f").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+
+            rangeColor: "#85cb34",
+            handleShape: "dot",
+            mouseScrollAction: true,
+            tooltipFormat: "round_f"
+        });
+        function round_f(args) {
+            return args.value + "%";
+        }
+
+        $("#slider_fin").roundSlider({
+            sliderType: "min-range",
+            startAngle: 90,
+            svgMode: true,
+            radius: 66,
+            width: 5,
+            showTooltip: false,
+            disabled: true,
+            rangeColor: "#659b28",
+
+        });
+    </script>
+
+    <!-- testing  -->
+
+
+</body>
+
+</html>
